@@ -35,3 +35,13 @@ jobs:
           name: rhino-${{ github.sha }}
           path: buildGradle/libs/*.jar
           if-no-files-found: error
+          retention-days: 1
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-report-${{ github.sha }}
+          path: buildGradle/reports/tests/
+          if-no-files-found: warn
+          retention-days: 1
